@@ -1,6 +1,7 @@
 import json, collections, facebook, urllib2
 
-oauth_access_token = "CAACEdEose0cBAPHk5ZCsHWKqhGZA7VEBLxbEgIso69cHbIKQXiC0n58MTl0ORTuqlV1tJowxYWDnt0Gku331wYwpxp8hVsaGXLvp8yc3NGWV1qPzTc8jZCJMxZCnCp43EubjQv6ugdOf4K1hTd4qASzCUCtxvZAUjLUayisMFDcHX9ZCW1uRoDFjAfWYMAKIHWiPUE73VFMiM4YPxbjn9Y"
+# replace token w new token
+oauth_access_token = "CAACEdEose0cBAOabT3jKFb17H0yRYUWDXzmKIe5iKxtOHkG6hHV6GIa8rDkibKcBQUai6fzKuRBnTkJB6GRuWRFaPT2P7qu4CZCqXLlYKQiatYcY58jQgOLGGFdWvnyfKi7HSE21k0hBwbweUHgapxSZBf2JMiydjQJrZCPEGqx41mI9591pKlt46JFEOb7PZAYT1X764bNAhn7q8ooL"
 graph = facebook.GraphAPI(oauth_access_token)
 
 def get_memes():
@@ -19,7 +20,6 @@ def get_memes():
 			next = False
 		iteration += 1
 		current = next
-
 
 def download_memes(data, saveName):
 	print type(data)
@@ -59,4 +59,17 @@ def slurp(next):
 		currentData.extend(laterData)
 	return currentData
 
+def combine_memes():
+	with open('0.json') as json_data:
+		root = json.load(json_data)
+		for i in xrange(1,17):
+			name = "%d.json" % i
+			with open(name) as lil_data:
+				data = json.load(lil_data)
+				root["data"].extend(data["data"])
+		with open("ps_ULTIMATE.json", 'w') as save:
+			save.write(json.dumps(root, sort_keys=True, indent=2))
+#########################################################
+
 get_memes()
+combine_memes()
