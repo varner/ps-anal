@@ -1,6 +1,6 @@
 import json, collections, facebook, urllib2
 
-oauth_access_token = "CAACEdEose0cBACrEr6KCESRjKGZBKSwp9F5aujoQlb9s7YFGi91698vFLgUMdi5ZCcKwFmUm6cCz9lv0lZBC2ZBySzHrVfiMoODUcgRuPaJRQOMcZAwhCWzo7NFoMJYL9HbSRxZBHeMeiy6ZBHyL1T7bU9B2pwQU6WpnNafRn91ZCUmem7ZAot6RhVO3ZAfJOXYWO8P019I5wNbeJMGI7niors"
+oauth_access_token = "CAACEdEose0cBAPHk5ZCsHWKqhGZA7VEBLxbEgIso69cHbIKQXiC0n58MTl0ORTuqlV1tJowxYWDnt0Gku331wYwpxp8hVsaGXLvp8yc3NGWV1qPzTc8jZCJMxZCnCp43EubjQv6ugdOf4K1hTd4qASzCUCtxvZAUjLUayisMFDcHX9ZCW1uRoDFjAfWYMAKIHWiPUE73VFMiM4YPxbjn9Y"
 graph = facebook.GraphAPI(oauth_access_token)
 
 def get_memes():
@@ -36,8 +36,11 @@ def download_memes(data, saveName):
 					print "keyerror?	", datum["likes"]["paging"]
 		if "comments" in datum:
 			if "next" in datum["comments"]["paging"]:
-				excess = slurp(datum["likes"]["paging"]["next"])
-				datum["comments"]["data"].extend(excess)
+				try:
+					excess = slurp(datum["likes"]["paging"]["next"])
+					datum["comments"]["data"].extend(excess)
+				except:
+					print "keyerror?	", datum["comments"]["paging"]
 	#SAVE IT ALLLLL TO A SINGLE FILE LMFAO 
 	with open(saveName, 'w') as save:
 		save.write(json.dumps(data, sort_keys=True, indent=2))
