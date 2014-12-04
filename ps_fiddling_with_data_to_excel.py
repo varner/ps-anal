@@ -35,36 +35,18 @@ with open('ps_ULTIMATE.json') as data_file:
                 yay = len(datum["likes"]["data"])
             else:
                 yay = 0
-            time = datum["updated_time"]
-            year = int(time[:4])
-            month = int(time[5:7])
-            day = int(time[8:10])
-            hour = int(time[11:13])
-            minute = int(time[14:16])
-            engagement.append([month, day, year, hour, minute, datum["from"]["name"], yay, int(datum["id"][16:]), int(datum["from"]["id"])])
+            engagement.append([datum["updated_time"], datum["from"]["name"], yay])
 
     book = xlwt.Workbook(encoding="utf-8")
     sheet1 = book.add_sheet("Sheet 1")
-    sheet1.write(0,0,"Month")
-    sheet1.write(0,1,"Day")
-    sheet1.write(0,2,"Year")
-    sheet1.write(0,3,"Hour")
-    sheet1.write(0,4,"Minute")
-    sheet1.write(0,5,"Posted By")
-    sheet1.write(0,6,"Likes")
-    sheet1.write(0,7,"Post ID")
-    sheet1.write(0,8,"Author ID")
+    sheet1.write(0,0,"Created Time")
+    sheet1.write(0,1,"Posted By")
+    sheet1.write(0,2,"Likes")
     for x in xrange(len(engagement)):
         print x
         sheet1.write(x+1,0, engagement[x][0])
         sheet1.write(x+1,1, engagement[x][1])
         sheet1.write(x+1,2, engagement[x][2])
-        sheet1.write(x+1,3, engagement[x][3])
-        sheet1.write(x+1,4, engagement[x][4])
-        sheet1.write(x+1,5, engagement[x][5])
-        sheet1.write(x+1,6, engagement[x][6])
-        sheet1.write(x+1,7, engagement[x][7])
-        sheet1.write(x+1,8, engagement[x][8])
     book.save("test.xls")
     print engagement[1]
 
