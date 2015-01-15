@@ -1,11 +1,13 @@
 import json, collections, facebook, urllib2
 
 # replace token w new token
-oauth_access_token = "CAACEdEose0cBAOabT3jKFb17H0yRYUWDXzmKIe5iKxtOHkG6hHV6GIa8rDkibKcBQUai6fzKuRBnTkJB6GRuWRFaPT2P7qu4CZCqXLlYKQiatYcY58jQgOLGGFdWvnyfKi7HSE21k0hBwbweUHgapxSZBf2JMiydjQJrZCPEGqx41mI9591pKlt46JFEOb7PZAYT1X764bNAhn7q8ooL"
+oauth_access_token = "CAACEdEose0cBAEZB6SNyyYCBwYyuDf4eKe14Lp88ZCHMTU8Q7mQCk559gmcNUCqksWdz2q67ygE0YvkwIbNvDDYs36QkyZC0Br3FRwHgTOLuAvjhpLUPAk3igMRrytjVtAVNO53E8mUF2dfuGK2I3ZAMuuYmqZAZACqydeRyZC1xcdcnsha8MwT2BNeIrBNEtYRfHiz0nSiCZCPi0pAZBhGc8"
 graph = facebook.GraphAPI(oauth_access_token)
 
 def get_memes():
 	#get the graph
+	# ps : 231149907051192
+	# internet lonely : 1487896971464517
 	group = graph.get_object("231149907051192/feed", limit=999)
 	current = group
 	iteration = 0
@@ -67,7 +69,7 @@ def combine_memes():
 			with open(name) as lil_data:
 				data = json.load(lil_data)
 				root["data"].extend(data["data"])
-		with open("ps_ULTIMATE.json", 'w') as save:
+		with open("internet_lonely_ULTIMATE.json", 'w') as save:
 			save.write(json.dumps(root, sort_keys=True, indent=2))
 #########################################################
 

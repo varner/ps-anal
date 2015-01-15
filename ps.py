@@ -3,7 +3,7 @@ import collections
 import xlwt
 
 #making sure i open the json file safely
-with open('ps_ULTIMATE.json') as data_file:
+with open('internet_lonely_ULTIMATE.json') as data_file:
     # loading the json data
     data = json.load(data_file)
     postCount = len(data["data"])
